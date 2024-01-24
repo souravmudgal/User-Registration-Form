@@ -49,10 +49,8 @@ function UserFormComponent() {
 
   const debouncedFetchCountries = debounce(async (newInputValue: string) => {
     try {
-      console.log("Searching for:", newInputValue);
       const response = await axios.get(`https://restcountries.com/v3.1/name/${newInputValue}?fullText=true`);
       const data = response.data;
-      console.log("API Response:", data);
 
       if (data) {
         const countryNames = data.map((country: any) => country.name.common);
@@ -64,18 +62,15 @@ function UserFormComponent() {
   }, 300);
 
   const handleAutocompleteInputChange = (event: React.ChangeEvent<{}>, newInputValue: string) => {
-    setInputValue(newInputValue); // Update the inputValue state
+    setInputValue(newInputValue);
     debouncedFetchCountries(newInputValue);
   };
 
   const handleAutocompleteChange = (event: React.ChangeEvent<{}>, newValue: string | null) => {
-    // Update the selectedCountry state
-    console.log(newValue);
     setSelectedCountry(newValue);
-    // Update the country field in the form data
     setFormData((prevFormData) => ({
       ...prevFormData,
-      country: newValue || "", // Use an empty string if newValue is null
+      country: newValue || "",
     }));
   };
 
@@ -89,7 +84,7 @@ function UserFormComponent() {
     address: string;
     state: string;
     city: string;
-    country: string; // Add this line
+    country: string;
     pincode: number;
   }>({
     name: "",
@@ -132,12 +127,7 @@ function UserFormComponent() {
     }));
   };
 
-  useEffect(() => {
-    // getCountry()
-  }, []);
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(formData);
     dispatch(setFormsData(formData));
   };
 
@@ -147,7 +137,7 @@ function UserFormComponent() {
         <div className="rounded-md border-2 p-2 bg-gray-300 mb-4">
           <h1 className="text-left">Personal Details</h1>
           <div className="flex flex-wrap items-center w-full  ">
-            <div className=" w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2">
+            <div className=" flexScreenStyle">
               <div className="flex items-center">
                 <label className="mr-2">
                   Name<span className="text-red-500">*</span>:
@@ -171,7 +161,7 @@ function UserFormComponent() {
               <p className="text-red-600 text-sm">{errors.name?.message}</p>
             </div>
 
-            <div className=" w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2">
+            <div className=" flexScreenStyle">
               <div className="flex items-center">
                 <label className="mr-2">
                   Date of Birth or Age <span className="text-red-500">*</span>:
@@ -195,7 +185,7 @@ function UserFormComponent() {
               <p className="text-red-600 text-sm">{errors.age?.message}</p>
             </div>
 
-            <div className=" w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2">
+            <div className=" flexScreenStyle">
               <div className="flex items-center ">
                 <label className="mr-2">
                   Sex<span className="text-red-500">*</span>:
@@ -210,7 +200,7 @@ function UserFormComponent() {
               <p className="text-red-600 text-sm">{errors.sex?.message}</p>
             </div>
 
-            <div className=" w-full md:w-1/2 lg:w-1/3 xl:w-1/3 px-2">
+            <div className=" flexScreenStyle">
               <div className="flex items-center ">
                 <label className="mr-2">
                   Mobile <span className="text-red-500">*</span>:
@@ -367,8 +357,8 @@ function UserFormComponent() {
           </div>
         </div>
 
-        <Button type="submit" className="flex w-full">
-          Submit
+        <Button type="submit" variant="contained" color="success">
+          Success
         </Button>
       </form>
     </>

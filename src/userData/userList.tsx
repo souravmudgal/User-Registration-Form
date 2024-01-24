@@ -1,4 +1,3 @@
-// UserDataComponent.tsx
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import * as jQuery from "jquery";
@@ -13,13 +12,11 @@ function UserDataComponent() {
   const tableRef = useRef(null);
 
   useEffect(() => {
-    // Initialize DataTable when the component mounts
     if (tableRef.current) {
-      // Using DataTable options for better customization
       $(tableRef.current).DataTable({
-        lengthMenu: [10, 25, 50, 75, 100], // Number of records to show per page
-        pageLength: 10, // Default number of records per page
-        dom: 'lrtip', // Placement of elements (l: length menu, r: processing, t: table, i: information, p: pagination)
+        lengthMenu: [10, 25, 50, 75, 100], 
+        pageLength: 10, 
+        dom: 'lrtip',
         language: {
           info: "Showing _START_ to _END_ of _TOTAL_ entries",
           infoEmpty: "No entries found",
@@ -53,7 +50,6 @@ function UserDataComponent() {
             <th className="">City</th>
             <th className="">Country</th>
             <th className="">Pincode</th>
-            {/* Add more columns based on your form fields */}
           </tr>
         </thead>
         <tbody>
@@ -70,7 +66,6 @@ function UserDataComponent() {
               <td className="border ">{formData.city || "N/A"}</td>
               <td className="border ">{formData.country || "N/A"}</td>
               <td className="border ">{formData.pincode || "N/A"}</td>
-              {/* Add more cells based on your form fields */}
             </tr>
           ))}
         </tbody>
