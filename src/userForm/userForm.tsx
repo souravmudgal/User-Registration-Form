@@ -251,9 +251,10 @@ function UserFormComponent() {
                     {...register("govtId")}
                     onChange={handleInputChange}
                   />
+                                <p className="text-red-600 text-sm">{errors.govtId?.message}</p>
+
                 </div>
               </div>
-              <p>{errors.govtId?.message}</p>
             </div>
           </div>
         </div>
