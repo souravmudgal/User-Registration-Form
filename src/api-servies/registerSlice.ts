@@ -1,22 +1,20 @@
-// personalSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface FormData {
   name: string;
   age: string;
-  // Add more fields as needed
 }
 
 interface InitialState {
   loading: boolean;
   error: string | null;
-  formDataList: FormData[]; // Change to an array of FormData
+  formDataList: FormData[];
 }
 
 const initialState: InitialState = {
   loading: false,
   error: null,
-  formDataList: [], // Initialize formDataList as an empty array
+  formDataList: [],
 };
 
 const personalSlice = createSlice({
@@ -24,7 +22,7 @@ const personalSlice = createSlice({
   initialState,
   reducers: {
     setFormsData: (state, action: PayloadAction<FormData>) => {
-      state.formDataList.push(action.payload); // Add the new form data to the list
+      state.formDataList.push(action.payload);
     },
   },
 });

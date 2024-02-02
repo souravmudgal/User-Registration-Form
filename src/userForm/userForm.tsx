@@ -51,7 +51,7 @@ function UserFormComponent() {
 
   const debouncedFetchCountries = debounce(async (newInputValue: string) => {
     try {
-      const response = await axios.get(`https://restcountries.com/v3.1/name/${newInputValue}?fullText=true`);
+      const response = await axios.get(`https://restcountries.com/v3.1/name/${newInputValue}`);
       const data = response.data;
 
       if (data) {
@@ -130,8 +130,22 @@ function UserFormComponent() {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    dispatch(setFormsData(formData));
+    dispatch(setFormsData(formData));  
+    setFormData({
+      name: "",
+      age: "",
+      sex: "",
+      mobile: "",
+      idType: "",
+      govtId: "",
+      address: "",
+      state: "",
+      city: "",
+      country: "",
+      pincode: 0,
+    });
   };
+  
 
   return (
     <>
