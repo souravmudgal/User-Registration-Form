@@ -11,18 +11,20 @@ import * as yup from "yup";
 
 function UserFormComponent() {
   const schema = yup.object().shape({
-    name: yup.string().required("Name is required"),
+    name: yup.string().required("Name is required").min(3, "Name must be at least 3 characters"),
     age: yup.string().required("Age is required"),
     mobile: yup.string().required("Mobile is required"),
     sex: yup.string().required("Sex is required"),
     idType: yup.string(),
     govtId: yup.string().test({
       name: "govtId",
-      message: "Govt Id is required for Aadhar and should have 12 numeric digits, not starting with 0 or 1",
+      message:  "Govt Id is required for Aadhar and should have 12 numeric digits, not starting with 0 or 1 and For PAN, It should be ten-character long alpha-numeric string.",
       test: function (value: any) {
         const idType = this.parent.idType;
         if (idType === "Aadhar") {
           return /^[2-9]\d{11}$/.test(value);
+        }else if (idType === "Pan") {
+          return /^[A-Za-z0-9]{10}$/.test(value)
         }
         return true;
       },
